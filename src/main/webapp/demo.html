@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>angular JS demo</title>
+    <script src="http://apps.bdimg.com/libs/angular.js/1.4.6/angular.min.js"></script>
+</head>
+<body ng-app="demo">
+
+<div ng-controller="myCtrl">
+
+    <select ng-modle="role">
+        <option>--请选择角色--</option>
+        <option ng-repeat="o in data" value="{{o.roleId}}">{{o.roleName}}</option>
+    </select>
+
+    <table>
+        <thead>
+            <tr>
+                <td>序号</td>
+                <td>角色名</td>
+                <td>描述</td>
+                <td>操作</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="o in data">
+                <td>{{o.roleId}}</td>
+                <td>{{o.roleName}}</td>
+                <td>{{o.description}}</td>
+                <td>
+                    <a href="">编辑</a>
+                    <a href="">删除</a>
+                </td>
+            </tr>
+        </tbody>
+        <tfoot></tfoot>
+    </table>
+</div>
+
+<script>
+    var m = angular.module("demo",[]);
+    var ctrl = m.controller("myCtrl",["$scope","$http",function($scope,$http){
+        $http({
+            method : "GET",
+            url : "http://localhost:8090/userManagement/getAllRole.action"
+        }).then(function successCallback(response){
+            console.log(response);
+            $scope.data = response.data;
+        },function errorCallback(){});
+
+    }]);
+
+</script>
+
+</body>
+</html>

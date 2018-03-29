@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+   <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter" >
+      <property name="messageConverters">
+         <list>
+            <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter" />
+            <bean class="org.springframework.http.converter.StringHttpMessageConverter">
+               <property name="supportedMediaTypes">
+                  <list>
+                     <value>text/plain;charset=utf-8</value>
+                     <value>text/html;charset=UTF-8</value>
+                  </list>
+               </property>
+            </bean>
+         </list>
+      </property>
+   </bean>
+
+   <mvc:annotation-driven conversion-service="conversionService" validator="validator" />
+   <context:component-scan base-package="per.martin.aviation.*.controller" />
+
+   <!-- 处理器映射器 -->
+   <bean class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping" />
+
+   <!-- 配置处理器适配器 -->
+   <bean class="org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter" />
+
+   <!--配置视图解析器-->
+   <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+      <property name="suffix" value=".jsp" />
+      <property name="prefix" value="/" />
+   </bean>
+
+   <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+      <property name="suffix" value=".html" />
+      <property name="prefix" value="/WEB-INF/views/" />
+   </bean>
+
+   <!--文件上传-->
+   <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+      <property name="maxUploadSize">
+         <value>5242880</value>
+      </property>
+   </bean>
+
+   <!-- 校验器，配置validator -->
+   <bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
+      <property name="providerClass" value="org.hibernate.validator.HibernateValidator" />
+      <property name="validationMessageSource" ref="validationMessageSource" />
+   </bean>
+
+    <!--配置validationMessageSource-->
+   <bean id="validationMessageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+      <!-- 指定校验信息的资源文件的基本文件名称，不包括后缀，后缀默认是properties -->
+      <property name="basenames">
+         <list>
+            <value>classpath:validation/validationMessageSource</value>
+         </list>
+      </property>
+      <!-- 指定文件的编码 -->
+      <property name="fileEncodings" value="utf8" />
+      <!-- 对资源文件内容缓存的时间，单位秒 -->
+      <property name="cacheSeconds" value="120" />
+   </bean>
+
+</beans>
