@@ -86,6 +86,7 @@
     </dependency>
 
     <!-- https://mvnrepository.com/artifact/org.mybatis/mybatis-spring -->
+
     <dependency>
       <groupId>org.mybatis</groupId>
       <artifactId>mybatis-spring</artifactId>
@@ -259,13 +260,6 @@
       <version>1.0</version>
     </dependency>
 
-
-    <!-- <dependency>
-       <groupId>org.aspectj</groupId>
-       <artifactId>aspectj</artifactId>
-       <version>1.6.10</version>
-     </dependency>-->
-
     <dependency>
       <groupId>org.activiti</groupId>
       <artifactId>activiti-engine</artifactId>
@@ -290,11 +284,11 @@
       <version>${activiti-version}</version>
     </dependency>
 
-    <!--<dependency>
+    <dependency>
       <groupId>org.activiti</groupId>
-      <artifactId>activiti-bpmn-mode</artifactId>
+      <artifactId>activiti-bpmn-model</artifactId>
       <version>${activiti-version}</version>
-    </dependency>-->
+    </dependency>
 
     <dependency>
       <groupId>org.activiti</groupId>
@@ -404,8 +398,6 @@
       <artifactId>activiti-simple-workflow</artifactId>
       <version>${activiti-version}</version>
     </dependency>
-
-
 
 
   </dependencies>

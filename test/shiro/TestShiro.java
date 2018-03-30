@@ -8,8 +8,10 @@ import org.apache.shiro.codec.Hex;
 import org.apache.shiro.config.IniSecurityManagerFactory;
 import org.apache.shiro.crypto.hash.Md5Hash;
 import org.apache.shiro.crypto.hash.Sha256Hash;
+import org.apache.shiro.crypto.hash.SimpleHash;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.subject.Subject;
+import org.apache.shiro.util.ByteSource;
 import org.apache.shiro.util.Factory;
 import org.junit.Assert;
 import org.junit.Test;
@@ -67,7 +69,13 @@ public class TestShiro {
         String md5Hash = new Md5Hash(str,String.valueOf(salt)).toString();
         System.out.println(md5Hash);
 
+    }
 
+    @Test
+    public void testSalt() {
+        ByteSource slat = ByteSource.Util.bytes("martin");
+        SimpleHash sh = new SimpleHash("MD5","12345678" , slat, 1024);
+        System.out.println(sh);
     }
 
 }

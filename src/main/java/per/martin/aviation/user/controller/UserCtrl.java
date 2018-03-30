@@ -1,13 +1,14 @@
 package per.martin.aviation.user.controller;
 
-import org.apache.shiro.authc.AuthenticationException;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.*;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import per.martin.aviation.statuscode.StatusCode;
 import per.martin.aviation.user.service.UserService;
-import per.martin.aviation.utils.JSONResult;
+import per.martin.aviation.utils.ReturnFormat;
 
 /**
  * @author martin
@@ -27,16 +28,33 @@ public class UserCtrl {
 
     @RequestMapping(value = "/login")
     @ResponseBody
-    public JSONResult login(String account,String password) {
-        JSONResult jsonResult = null;
-        try {
-            userService.login(account,password);
-            jsonResult = JSONResult.getInstance(200,"success");
-        } catch (AuthenticationException e) {
-            jsonResult = JSONResult.getInstance(StatusCode.ACCOUNT_NOT_FOUND,e.getMessage());
-            e.printStackTrace();
-        }
-        return jsonResult;
+    public String login(String account,String password) {
 
+        Subject currentUser = SecurityUtils.getSubject();
+
+        if(!currentUser.isAuthenticated()) {
+            UsernamePasswordToken token = new UsernamePasswordToken(account,password);
+            token.setRememberMe(false);
+            try {
+                currentUser.login(token);
+                return ReturnFormat.retParam(200,null);
+            } catch (IncorrectCredentialsException ice) {
+                return ReturnFormat.retParam(1012,null);
+            } catch (LockedAccountException lae) {
+                return ReturnFormat.retParam(1016,null);
+            } catch (UnknownAccountException ue) {
+                return ReturnFormat.retParam(1010,null);
+            } catch (DisabledAccountException de) {
+                return ReturnFormat.retParam(1013,null);
+            }
+        }
+        return ReturnFormat.retParam(1017,null);
     }
+
+    @RequestMapping(value = "/logout")
+    @ResponseBody
+    public String logout() {
+        return ReturnFormat.retParam(200,null);
+    }
+
 }

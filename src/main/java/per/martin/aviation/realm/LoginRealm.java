@@ -1,3 +1,4 @@
+
 package per.martin.aviation.realm;
 
 import org.apache.shiro.authc.*;
@@ -10,12 +11,15 @@ import per.martin.aviation.user.entity.SysUser;
 
 import java.util.List;
 
+
 /**
- * @author martin
+ * shiro用户认证
+ * @author williamJM
  * @version v1.0
  * createDate  2018/3/26 20:59
  * @since JDK1.8
  */
+
 @Component
 public class LoginRealm extends AuthenticatingRealm {
     private SysUserMapper userMapper;
@@ -29,19 +33,23 @@ public class LoginRealm extends AuthenticatingRealm {
     public AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token)
             throws AuthenticationException {
         UsernamePasswordToken usernamePasswordToken = (UsernamePasswordToken)token;
-        List<SysUser> user = userMapper.selectBySingleColumn("login_name",usernamePasswordToken.getUsername());
-        SimpleAuthenticationInfo info = null;
-        if(user.size() > 0 && user.get(0) != null) {
-            Object principal = user.get(0).getLoginName();
-            Object credentials = user.get(0).getPassword();
-            String realmName = this.getName();
-            ByteSource salt = ByteSource.Util.bytes(user.get(0).getTuId());
-            info = new SimpleAuthenticationInfo(principal,credentials,salt,realmName);
 
+        List<SysUser> users = userMapper.selectSingleColumn("login_name","'" + usernamePasswordToken.getUsername() + "'");
+
+        if(users.isEmpty()) {
+            throw new UnknownAccountException();
         } else {
-            throw new AuthenticationException("该账户不存在");
+            SysUser user = users.get(0);
+
+            Object principal = usernamePasswordToken.getUsername();
+            Object credentials = user.getPassword();
+            String realmName = getName();
+
+            ByteSource salt = ByteSource.Util.bytes(usernamePasswordToken.getUsername());
+
+             return new SimpleAuthenticationInfo(principal,credentials,salt,realmName);
         }
 
-        return info;
     }
 }
+

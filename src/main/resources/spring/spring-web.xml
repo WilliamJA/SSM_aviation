@@ -12,6 +12,16 @@
         http://www.springframework.org/schema/mvc
         http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
+   <mvc:annotation-driven>
+      <!--responseBody返回中文乱码转换-->
+      <mvc:message-converters>
+         <bean class="org.springframework.http.converter.StringHttpMessageConverter">
+            <property name="supportedMediaTypes" value="text/html;charset=UTF-8" />
+         </bean>
+      </mvc:message-converters>
+   </mvc:annotation-driven>
+   <context:component-scan base-package="per.martin.aviation.**.controller" />
+
    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter" >
       <property name="messageConverters">
          <list>
@@ -28,8 +38,6 @@
       </property>
    </bean>
 
-   <mvc:annotation-driven conversion-service="conversionService" validator="validator" />
-   <context:component-scan base-package="per.martin.aviation.*.controller" />
 
    <!-- 处理器映射器 -->
    <bean class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping" />
@@ -56,23 +64,23 @@
    </bean>
 
    <!-- 校验器，配置validator -->
-   <bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
+   <!--<bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
       <property name="providerClass" value="org.hibernate.validator.HibernateValidator" />
       <property name="validationMessageSource" ref="validationMessageSource" />
-   </bean>
+   </bean>-->
 
     <!--配置validationMessageSource-->
-   <bean id="validationMessageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
-      <!-- 指定校验信息的资源文件的基本文件名称，不包括后缀，后缀默认是properties -->
+   <!--<bean id="validationMessageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+      &lt;!&ndash; 指定校验信息的资源文件的基本文件名称，不包括后缀，后缀默认是properties &ndash;&gt;
       <property name="basenames">
          <list>
             <value>classpath:validation/validationMessageSource</value>
          </list>
       </property>
-      <!-- 指定文件的编码 -->
+      &lt;!&ndash; 指定文件的编码 &ndash;&gt;
       <property name="fileEncodings" value="utf8" />
-      <!-- 对资源文件内容缓存的时间，单位秒 -->
+      &lt;!&ndash; 对资源文件内容缓存的时间，单位秒 &ndash;&gt;
       <property name="cacheSeconds" value="120" />
-   </bean>
+   </bean>-->
 
 </beans>

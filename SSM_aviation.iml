@@ -99,9 +99,9 @@
     <orderEntry type="library" name="Maven: commons-dbcp:commons-dbcp:1.4" level="project" />
     <orderEntry type="library" name="Maven: commons-pool:commons-pool:1.5.4" level="project" />
     <orderEntry type="library" name="Maven: org.activiti:activiti-bpmn-converter:5.22.0" level="project" />
-    <orderEntry type="library" name="Maven: org.activiti:activiti-bpmn-model:5.22.0" level="project" />
     <orderEntry type="library" name="Maven: org.activiti:activiti-bpmn-layout:5.22.0" level="project" />
     <orderEntry type="library" name="Maven: org.tinyjee.jgraphx:jgraphx:1.10.4.1" level="project" />
+    <orderEntry type="library" name="Maven: org.activiti:activiti-bpmn-model:5.22.0" level="project" />
     <orderEntry type="library" name="Maven: org.activiti:activiti-camel:5.22.0" level="project" />
     <orderEntry type="library" name="Maven: org.apache.camel:camel-spring:2.17.1" level="project" />
     <orderEntry type="library" name="Maven: org.apache.camel:camel-core:2.17.1" level="project" />

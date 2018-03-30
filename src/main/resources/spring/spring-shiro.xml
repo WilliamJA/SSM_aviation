@@ -9,7 +9,6 @@
        http://www.springframework.org/schema/context/spring-context.xsd">
     <context:component-scan base-package="per.martin.aviation.realm" />
 
-    <bean id="loginRealm" class="per.martin.aviation.realm.LoginRealm" />
 
     <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
         <property name="cacheManager" ref="cacheManager"/>
@@ -20,11 +19,11 @@
         <property name="cacheManagerConfigFile" value="classpath:ehcache/ehcache.xml"/>
     </bean>
 
-    <bean id="jdbcRealm" class="per.martin.aviation.realm.LoginRealm">
+    <bean id="loginRealm" class="per.martin.aviation.realm.LoginRealm">
         <property name="credentialsMatcher">
             <bean class="org.apache.shiro.authc.credential.HashedCredentialsMatcher">
                 <property name="hashAlgorithmName" value="MD5"/>
-                <property name="hashIterations" value="50"/>
+                <property name="hashIterations" value="1024"/>
             </bean>
         </property>
     </bean>
@@ -38,7 +37,6 @@
         <property name="securityManager" ref="securityManager"/>
     </bean>
 
-
     <bean id="secureRemoteInvocationExecutor" class="org.apache.shiro.spring.remoting.SecureRemoteInvocationExecutor">
         <property name="securityManager" ref="securityManager"/>
     </bean>
@@ -50,15 +48,13 @@
         <property name="unauthorizedUrl" value="404.jsp"/>
         <property name="filterChainDefinitions">
             <value>
-                <!--/login.jsp = anon
+                /login.jsp = anon
                 /index.jsp = anon
                 /login.action = anon
-                # allow WebStart to pull the jars for the swing app:
-                /*.jar = anon
-                # everything else requires authentication:-->
+                /logout = logout
+                /login.jsp = anon
                 /** = anon
             </value>
         </property>
     </bean>
-
 </beans>

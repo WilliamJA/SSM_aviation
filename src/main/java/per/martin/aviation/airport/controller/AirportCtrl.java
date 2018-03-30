@@ -12,9 +12,7 @@ import per.martin.aviation.airport.vo.AirChartVo;
 import per.martin.aviation.statuscode.StatusCode;
 import per.martin.aviation.utils.JSONResult;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
-import java.util.Map;
 
 /**
  * @author martin
@@ -39,9 +37,9 @@ public class AirportCtrl {
         return JSONResult.getInstance(StatusCode.INSERT_SUCCESS,"success");
     }
 
-    @RequestMapping(value = "/getAirCharByCode")
+    @RequestMapping(value = "/getAirChartByCode")
     @ResponseBody
-    public JSONResult getAirCharByCode(@Validated String code) {
+    public JSONResult getAirChartByCode(String code) {
         try {
             List<AirChartVo> res = airportService.getAirChartByCode(code);
             return JSONResult.getInstance(200,"success",res);

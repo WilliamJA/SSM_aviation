@@ -11,15 +11,15 @@
     <title>Login</title>
 </head>
 <body>
-<form action="/login.action" method="post">
+<form action="/user/login" method="post">
     <label>userName:
-        <input type="text" name="userName">
+        <input type="text" name="account">
     </label><br>
     <label>password:
         <input type="text" name="password">
     </label><br>
-    <label>userName:
-        <input type="submit" value="submit">
+    <label>
+        <input type="submit" value="登录">
     </label><br>
 </form>
 

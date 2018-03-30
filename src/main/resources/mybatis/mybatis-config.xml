@@ -28,5 +28,7 @@
         <typeAlias alias="AirCompany" type="per.martin.aviation.aircompany.entity.AirCompany" />
         <typeAlias alias="SysLog" type="per.martin.aviation.logger.entity.SysLog" />
         <typeAlias alias="SysUser" type="per.martin.aviation.user.entity.SysUser" />
+        <typeAlias alias="SysUserEvent" type="per.martin.aviation.calendar.entity.SysUserEvent" />
+        <typeAlias alias="SysUserEventLabel" type="per.martin.aviation.calendar.entity.SysUserEventLabel" />
     </typeAliases>
 </configuration>

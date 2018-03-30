@@ -1,7 +1,9 @@
-package test.dao;
+package per.martin.aviation.calendar.dao;
 
 import java.util.List;
-import test.model.SysUserEventLabel;
+
+import org.apache.ibatis.annotations.Param;
+import per.martin.aviation.calendar.entity.SysUserEventLabel ;
 
 public interface SysUserEventLabelMapper {
     /**
@@ -43,4 +45,14 @@ public interface SysUserEventLabelMapper {
      * @mbggenerated
      */
     int updateByPrimaryKey(SysUserEventLabel record);
+
+    /**
+     * 查询单列
+     * @author willianJM
+     * @param column
+     * @param value
+     * @return
+     */
+    List<SysUserEventLabel> selectSingleColumn(@Param("column") String column,
+                                               @Param("value") Object value);
 }

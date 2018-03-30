@@ -27,16 +27,12 @@ public class Airport {
      * IATA代码
      * IATA
      */
-    @Min(3)
-    @Max(3)
     private String iata;
 
     /**
      * ICAO代码
      * ICAO
      */
-    @Min(4)
-    @Max(4)
     private String icao;
 
     /**

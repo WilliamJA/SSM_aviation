@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import per.martin.aviation.aircraft.entity.AircraftType;
 import per.martin.aviation.aircraft.service.AircraftTypeService;
-import per.martin.aviation.controller.BaseController;
 import per.martin.aviation.statuscode.StatusCode;
 import per.martin.aviation.utils.JSONResult;
 
@@ -20,7 +19,7 @@ import java.util.List;
  */
 @Controller
 @RequestMapping(value = "/aircraftType")
-public class AircraftTypeCtrl extends BaseController {
+public class AircraftTypeCtrl {
     private AircraftTypeService aircraftTypeService;
 
     @Autowired

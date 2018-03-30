@@ -9,5 +9,4 @@ package per.martin.aviation.user.service;
  */
 public interface UserService {
 
-    void login(String account,String password);
 }

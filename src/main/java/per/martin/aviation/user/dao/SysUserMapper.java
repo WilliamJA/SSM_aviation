@@ -49,6 +49,7 @@ public interface SysUserMapper {
     /**
      * 查询单列
      */
-    List<SysUser> selectBySingleColumn(@Param("column") String column,
+    List<SysUser> selectSingleColumn(@Param("column") String column,
                                        @Param("value") Object value);
+
 }

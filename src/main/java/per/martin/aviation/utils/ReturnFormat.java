@@ -16,6 +16,8 @@ public class ReturnFormat {
     static {
         messageMap.put("0", "");
 
+        messageMap.put("200","success");
+
         messageMap.put("400", "Bad Request!");
         messageMap.put("401", "NotAuthorization");
         messageMap.put("405", "Method Not Allowed");
@@ -30,12 +32,14 @@ public class ReturnFormat {
         messageMap.put("1005", "[服务器]数组越界异常");
         messageMap.put("1006", "[服务器]网络异常");
 
-        messageMap.put("1010", "用户未注册");
+        messageMap.put("1010", "该账户不存在");
         messageMap.put("1011", "用户已注册");
-        messageMap.put("1012", "用户名或密码错误");
-        messageMap.put("1013", "用户帐号冻结");
+        messageMap.put("1012", "密码错误，请重新输入");
+        messageMap.put("1013", "用户账户已被禁用，请与主管部门联系");
         messageMap.put("1014", "用户信息编辑失败");
         messageMap.put("1015", "用户信息失效，请重新获取");
+        messageMap.put("1016", "该账户已被锁定，请稍后再试");
+        messageMap.put("1017", "用户已登录");
 
         messageMap.put("1020", "验证码发送失败");
         messageMap.put("1021", "验证码失效");
